@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language ref="português_brasileiro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="lang.xsd">
+	<command name="userla">
+		<item type="title">Última atividade dos usuários</item>
+		<item type="help">Mostra a última atividade dos usuários no servidor</item>
+		<item type="date">%d/%m/%Y, %H:%M</item>
+		<item type="field1_name">Usuário</item>
+		<item type="field1_content">última atividade em</item>
+		<item type="field2_name">Página</item>
+		<item type="field2_content">não possui atividade recente no canal</item>
+		<item type="field3_name">Ajuda</item>
+		<item type="field3_content">Para navegar entre as páginas, use **cs-userla _NÚMERO\_DA\_PÁGINA_**</item>
+	</command>
+	<error name="userla_error">
+		<item type="title">Oops...</item>
+		<item type="field1_name">Erro</item>
+		<item type="field1_content">Encontrei um erro ao processar seu pedido, por acaso você esqueceu de colocar o número da página?</item>
+		<item type="field2">Ajuda</item>
+		<item type="field2_content">Para navegar entre as páginas, use **cs-userla _NÚMERO\_DA\_PÁGINA_**</item>
+	</error>
+</language>

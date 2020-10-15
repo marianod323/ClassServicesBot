@@ -1,0 +1,4 @@
+<server xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="servers.xsd">
+	<lang>english</lang>
+	<timezone>0</timezone>
+</server>

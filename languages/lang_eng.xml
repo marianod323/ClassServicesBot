@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language ref="english" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="lang.xsd">
+	<command name="userla">
+		<item type="title">Users last activity</item>
+		<item type="help">Shows the users last activity on server</item>
+		<item type="date">%m/%d/%Y, %H:%M</item>
+		<item type="field1_name">User</item>
+		<item type="field1_content">last activity on</item>
+		<item type="field2_name">Page</item>
+		<item type="field2_content">has no recent activity on text channel</item>
+		<item type="field3_name">Help</item>
+		<item type="field3_content">To navigate through pages, use **cs-userla _PAGE\_NUMBER_**</item>
+	</command>
+	<error name="userla_error">
+		<item type="title">Oops...</item>
+		<item type="field1_name">Error</item>
+		<item type="field1_content">I've found an error on handling your request, maybe you forgot to specify the page number?</item>
+		<item type="field2">Help</item>
+		<item type="field2_content">To navigate through pages, use **cs-userla _PAGE\_NUMBER_**</item>
+	</error>
+</language>
