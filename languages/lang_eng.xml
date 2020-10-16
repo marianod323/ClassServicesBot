@@ -18,4 +18,20 @@
 		<item type="field2">Help</item>
 		<item type="field2_content">To navigate through pages, use **cs-userla _PAGE\_NUMBER_**</item>
 	</error>
+	<command name="usercount">
+		<item type="title">Users quantity</item>
+		<item type="help">Shows how many users and bots are on the server</item>
+		<item type="field1_name">Users</item>
+		<item type="field2_name">Bots</item>
+	</command>
+	<command name="help">
+		<item type="title">Help</item>
+		<item type="help">Displays how to use each commands</item>
+		<item type="prefix">cs-</item>
+		<item type="field1_name">How to use commands</item>
+		<item type="field1_content">To use bot commands, type the command in a text channel</item>
+		<item type="field2_name">userla _PAGE\_NUMBER_</item>
+		<item type="field3_name">usercount</item>
+		<item type="field4_name">help</item>
+	</command>
 </language>
