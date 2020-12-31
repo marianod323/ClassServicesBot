@@ -40,7 +40,7 @@ async def userla(ctx, actual_page: int):
                 if activity > lastest_activity:
                     lastest_activity = activity
             from_zone = tz.tzutc()
-            to_zone = tz.tzlocal()
+            to_zone = tz.gettz('Etc/GMT' + server_timezone)
             lastest_activity = lastest_activity.replace(tzinfo=from_zone)
             lastest_activity = lastest_activity.astimezone(to_zone).strftime(
                 language.find("command[@name='userla']/item[@type='date']").text)
@@ -49,7 +49,7 @@ async def userla(ctx, actual_page: int):
                            "command[@name='userla']/item[@type='field1_content']").text + f' {lastest_activity}\n'
         else:
             user_la += f'**{user.display_name}** ' + \
-                       language.find("command[@name='userla']/item[@type='field2_content']") + '\n'
+                       language.find("command[@name='userla']/item[@type='field2_content']").text + '\n'
         user_index += 1
         last_activity = []
     embed = discord.Embed(title=language.find("command[@name='userla']/item[@type='title']").text, color=0x85fd2c)
@@ -67,11 +67,11 @@ async def userla_error(ctx, error):
     pref_handler = PrefHandler(ctx.guild.id)
     language = pref_handler.get_lang()
 
-    embed = discord.Embed(title=language.find("command[@name='userla_error']/item[@type='title']").text, color=0x85fd2c)
-    embed.add_field(name=language.find("command[@name='userla_error']/item[@type='field1_name']").text,
-                    value=language.find("command[@name='userla_error']/item[@type='field1_content']").text, inline=False)
-    embed.add_field(name=language.find("command[@name='userla_error']/item[@type='field2_name']").text,
-                    value=language.find("command[@name='userla_error']/item[@type='field2_content']").text, inline=False)
+    embed = discord.Embed(title=language.find("error[@name='userla_error']/item[@type='title']").text, color=0x85fd2c)
+    embed.add_field(name=language.find("error[@name='userla_error']/item[@type='field1_name']").text,
+                    value=language.find("error[@name='userla_error']/item[@type='field1_content']").text, inline=False)
+    embed.add_field(name=language.find("error[@name='userla_error']/item[@type='field2_name']").text,
+                    value=language.find("error[@name='userla_error']/item[@type='field2_content']").text, inline=False)
     await ctx.send(embed=embed)
 
 

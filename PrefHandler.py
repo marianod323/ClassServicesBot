@@ -41,7 +41,7 @@ class PrefHandler(object):
             return 0
 
     def get_timezone(self):
-        return int(self.root[1].text)
+        return self.root.find('timezone').text
 
     def set_timezone(self, new_timezone):
         if int(new_timezone) in range(-11, 14, 1):

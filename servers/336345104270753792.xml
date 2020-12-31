@@ -1,4 +1,4 @@
 <server xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="servers.xsd">
 	<lang>português_brasileiro</lang>
-	<timezone>0</timezone>
+	<timezone>-4</timezone>
 </server>
