@@ -15,7 +15,7 @@
 		<item type="title">Oops...</item>
 		<item type="field1_name">Erro</item>
 		<item type="field1_content">Encontrei um erro ao processar seu pedido, por acaso você esqueceu de colocar o número da página?</item>
-		<item type="field2">Ajuda</item>
+		<item type="field2_name">Ajuda</item>
 		<item type="field2_content">Para navegar entre as páginas, use **cs-userla _NÚMERO\_DA\_PÁGINA_**</item>
 	</error>
 	<command name="usercount">

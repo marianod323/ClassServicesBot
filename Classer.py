@@ -22,9 +22,9 @@ async def userla(ctx, actual_page: int):
     channel_index = 0
     user_index = 0
     user_la = f""
-    num_pages = math.ceil(numpy.size(ctx.guild.members)/10)
-    offset = (10*(actual_page-1))
-    max_index = 10*actual_page
+    num_pages = math.ceil(numpy.size(ctx.guild.members) / 10)
+    offset = (10 * (actual_page - 1))
+    max_index = 10 * actual_page
     members = ctx.guild.members[offset:max_index]
     for user in members:
         for channel in ctx.guild.channels:
@@ -42,16 +42,23 @@ async def userla(ctx, actual_page: int):
             from_zone = tz.tzutc()
             to_zone = tz.tzlocal()
             lastest_activity = lastest_activity.replace(tzinfo=from_zone)
-            lastest_activity = lastest_activity.astimezone(to_zone).strftime(language[0][2].text)
-            user_la += f'**{user.display_name}** '+language[0][4].text+f' {lastest_activity}\n'
+            lastest_activity = lastest_activity.astimezone(to_zone).strftime(
+                language.find("command[@name='userla']/item[@type='date']").text)
+            user_la += f'**{user.display_name}** ' + \
+                       language.find(
+                           "command[@name='userla']/item[@type='field1_content']").text + f' {lastest_activity}\n'
         else:
-            user_la += f'**{user.display_name}** '+language[0][6].text+'\n'
+            user_la += f'**{user.display_name}** ' + \
+                       language.find("command[@name='userla']/item[@type='field2_content']") + '\n'
         user_index += 1
         last_activity = []
-    embed = discord.Embed(title=language[0][0].text, color=0x85fd2c)
-    embed.add_field(name=language[0][3].text, value=user_la, inline=False)
-    embed.add_field(name=language[0][5].text, value=f'{actual_page}/{num_pages}', inline=False)
-    embed.add_field(name=language[0][7].text, value=language[0][8].text, inline=False)
+    embed = discord.Embed(title=language.find("command[@name='userla']/item[@type='title']").text, color=0x85fd2c)
+    embed.add_field(name=language.find("command[@name='userla']/item[@type='field1_name']").text,
+                    value=user_la, inline=False)
+    embed.add_field(name=language.find("command[@name='userla']/item[@type='field2_name']").text,
+                    value=f'{actual_page}/{num_pages}', inline=False)
+    embed.add_field(name=language.find("command[@name='userla']/item[@type='field3_name']").text,
+                    value=language.find("command[@name='userla']/item[@type='field3_content']").text, inline=False)
     await ctx.send(embed=embed)
 
 
@@ -60,9 +67,11 @@ async def userla_error(ctx, error):
     pref_handler = PrefHandler(ctx.guild.id)
     language = pref_handler.get_lang()
 
-    embed = discord.Embed(title=language[1][0].text, color=0x85fd2c)
-    embed.add_field(name=language[1][1].text, value=language[1][2].text, inline=False)
-    embed.add_field(name=language[1][3].text, value=language[1][4].text, inline=False)
+    embed = discord.Embed(title=language.find("command[@name='userla_error']/item[@type='title']").text, color=0x85fd2c)
+    embed.add_field(name=language.find("command[@name='userla_error']/item[@type='field1_name']").text,
+                    value=language.find("command[@name='userla_error']/item[@type='field1_content']").text, inline=False)
+    embed.add_field(name=language.find("command[@name='userla_error']/item[@type='field2_name']").text,
+                    value=language.find("command[@name='userla_error']/item[@type='field2_content']").text, inline=False)
     await ctx.send(embed=embed)
 
 
@@ -78,21 +87,33 @@ async def usercount(ctx):
             bot_count += 1
         else:
             users_count += 1
-    embed = discord.Embed(title=language[2][0].text, color=0x85fd2c)
-    embed.add_field(name=language[2][2].text, value=str(users_count), inline=False)
-    embed.add_field(name=language[2][3].text, value=str(bot_count), inline=False)
+    embed = discord.Embed(title=language.find("command[@name='usercount']/item[@type='title']").text, color=0x85fd2c)
+    embed.add_field(name=language.find("command[@name='usercount']/item[@type='field1_name']").text,
+                    value=str(users_count), inline=False)
+    embed.add_field(name=language.find("command[@name='usercount']/item[@type='field2_name']").text,
+                    value=str(bot_count), inline=False)
     await ctx.send(embed=embed)
+
+
+@bot.command(name='setlang')
+async def setlang(ctx):
+    await ctx.send('oi')
 
 
 @bot.command(name='help')
 async def help(ctx):
     pref_handler = PrefHandler(ctx.guild.id)
     language = pref_handler.get_lang()
-    embed = discord.Embed(title=language[3][0].text, color=0x85fd2c)
-    embed.add_field(name=language[3][3].text, value=language[3][4].text, inline=False)
-    embed.add_field(name=language[3][2].text+language[3][5].text, value=language[0][1].text, inline=False)
-    embed.add_field(name=language[3][2].text+language[3][6].text, value=language[2][1].text, inline=False)
-    embed.add_field(name=language[3][2].text+language[3][7].text, value=language[3][1].text, inline=False)
+    prefix = language.find("command[@name='help']/item[@type='prefix']").text
+    embed = discord.Embed(title=language.find("command[@name='help']/item[@type='title']").text, color=0x85fd2c)
+    embed.add_field(name=language.find("command[@name='help']/item[@type='field1_name']").text,
+                    value=language.find("command[@name='help']/item[@type='field1_content']").text, inline=False)
+    embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field2_name']").text,
+                    value=language.find("command[@name='userla']/item[@type='help']").text, inline=False)
+    embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field3_name']").text,
+                    value=language.find("command[@name='usercount']/item[@type='help']").text, inline=False)
+    embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field4_name']").text,
+                    value=language.find("command[@name='help']/item[@type='help']").text, inline=False)
     await ctx.send(embed=embed)
 
 

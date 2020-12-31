@@ -15,7 +15,7 @@
 		<item type="title">Oops...</item>
 		<item type="field1_name">Error</item>
 		<item type="field1_content">I've found an error on handling your request, maybe you forgot to specify the page number?</item>
-		<item type="field2">Help</item>
+		<item type="field2_name">Help</item>
 		<item type="field2_content">To navigate through pages, use **cs-userla _PAGE\_NUMBER_**</item>
 	</error>
 	<command name="usercount">
