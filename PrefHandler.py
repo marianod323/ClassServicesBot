@@ -2,7 +2,6 @@ import xml.etree.ElementTree as ET
 import os
 import pandas as pd
 import shutil
-import subprocess
 
 
 def server_file_check(guild_id):
@@ -33,8 +32,8 @@ class PrefHandler(object):
         return None
 
     def set_lang(self, new_lang):
-        if new_lang in self.languages.values():
-            self.root[0].text = new_lang
+        if new_lang in self.languages.keys():
+            self.root[0].text = self.languages[new_lang]
             self.tree.write(self.file_name)
             return 1
         else:
@@ -42,6 +41,17 @@ class PrefHandler(object):
 
     def get_timezone(self):
         return self.root.find('timezone').text
+
+    def get_role(self):
+        return self.root.find('role').text
+
+    def get_names(self):
+        names = dict()
+        path = list(self.root.find('users'))
+        for user in path:
+            names[user.attrib['username']] = user.text
+
+        return names
 
     def set_timezone(self, new_timezone):
         if int(new_timezone) in range(-11, 14, 1):

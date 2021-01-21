@@ -33,5 +33,42 @@
 		<item type="field2_name">userla _NÚMERO\_DA\_PÁGINA_</item>
 		<item type="field3_name">usercount</item>
 		<item type="field4_name">help</item>
+		<item type="field5_name">setlang _TAG_</item>
+		<item type="field6_name">settz _VALOR_</item>
+		<item type="field7_name">setname _"NOME\_ENTRE\_ASPAS"_</item>
+		<item type="field8_name">getnames</item>
+	</command>
+	<command name="setlang">
+		<item type="title">Língua</item>
+		<item type="help">Define a língua que o bot irá falar</item>
+		<item type="howto">Para definir a língua, utilize o comando juntamente com a tag (lang_SIGLA) da língua desejada. As línguas que eu sei falar, por enquanto, são essas aqui:</item>
+		<item type="success">Língua alterada!</item>
+		<item type="success_title">Sucesso!</item>
+	</command>
+	<command name="settz">
+		<item type="title">Fuso horário</item>
+		<item type="help">Define o fuso horário que o bot irá responder</item>
+		<item type="success">Fuso alterado!</item>
+		<item type="success_title">Sucesso!</item>
+	</command>
+	<command name="setname">
+		<item type="title">Nomes</item>
+		<item type="help">Relaciona o nome de usuário com o nome real do usuário</item>
+		<item type="success">Nome alterado!</item>
+		<item type="success_title">Sucesso!</item>
+	</command>
+	<command name="getnames">
+		<item type="title">Nomes</item>
+		<item type="help">Mostra a relação dos nomes reais com os nomes de usuário</item>
+		<item type="users">Usuários no servidor</item>
+	</command>
+	<command name="setrole">
+		<item type="title">Restrições</item>
+		<item type="help">Define o nível de poder necessário para utilizar comandos sensíveis</item>
+		<item type="fail_title">Falha</item>
+		<item type="fail">Você não possui poder suficiente para isso.</item>
+		<item type="fail_2">O cargo que você está tentando definir não existe.</item>
+		<item type="success_title">Sucesso</item>
+		<item type="success">Cargo para utilização dos comandos sensíveis redefinido!</item>
 	</command>
 </language>

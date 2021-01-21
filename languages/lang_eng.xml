@@ -34,4 +34,16 @@
 		<item type="field3_name">usercount</item>
 		<item type="field4_name">help</item>
 	</command>
+	<command name="setlang">
+		<item type="title">Lingua</item>
+		<item type="help">Define a língua que o bot irá falar</item>
+		<item type="success">Língua alterada!</item>
+		<item type="success_title">Sucesso!</item>
+	</command>
+	<command name="settz">
+		<item type="title">Fuso horário</item>
+		<item type="help">Define o fuso horário que o bot irá responder</item>
+		<item type="success">Fuso alterado!</item>
+		<item type="success_title">Sucesso!</item>
+	</command>
 </language>
