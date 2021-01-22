@@ -33,17 +33,42 @@
 		<item type="field2_name">userla _PAGE\_NUMBER_</item>
 		<item type="field3_name">usercount</item>
 		<item type="field4_name">help</item>
+		<item type="field5_name">setlang _TAG_</item>
+		<item type="field6_name">settz _VALUE_</item>
+		<item type="field7_name">setname _"NAME\_BETWEEN\_QUOTE\_MARKS"_</item>
+		<item type="field8_name">getnames</item>
+		<item type="field9_name">setrole _"VALUE\_BETWEEN\_QUOTE\_MARKS"_</item>
 	</command>
 	<command name="setlang">
-		<item type="title">Lingua</item>
-		<item type="help">Define a língua que o bot irá falar</item>
-		<item type="success">Língua alterada!</item>
-		<item type="success_title">Sucesso!</item>
+		<item type="title">Language</item>
+		<item type="help">Defines bot's language</item>
+		<item type="success">Language modified!</item>
+		<item type="success_title">Success!</item>
 	</command>
 	<command name="settz">
-		<item type="title">Fuso horário</item>
-		<item type="help">Define o fuso horário que o bot irá responder</item>
-		<item type="success">Fuso alterado!</item>
-		<item type="success_title">Sucesso!</item>
+		<item type="title">Time Zone</item>
+		<item type="help">Defines bot's time zone</item>
+		<item type="success">Time Zone changed!</item>
+		<item type="success_title">Success!</item>
+	</command>
+	<command name="setname">
+		<item type="title">Names</item>
+		<item type="help">Creates a relation between the user's username and real name</item>
+		<item type="success">Name changed!</item>
+		<item type="success_title">Success!</item>
+	</command>
+	<command name="getnames">
+		<item type="title">Names</item>
+		<item type="help">Shows the relation between the user's username and real name</item>
+		<item type="users">Users in server</item>
+	</command>
+	<command name="setrole">
+		<item type="title">Restrictions</item>
+		<item type="help">Defines the power level needed to use sensitive commands</item>
+		<item type="fail_title">Fail</item>
+		<item type="fail">You don't have permission to do this.</item>
+		<item type="fail_2">The role you are trying to define does not exists.</item>
+		<item type="success_title">Success</item>
+		<item type="success">Role for using the sensitive commands redefined!</item>
 	</command>
 </language>

@@ -37,6 +37,7 @@
 		<item type="field6_name">settz _VALOR_</item>
 		<item type="field7_name">setname _"NOME\_ENTRE\_ASPAS"_</item>
 		<item type="field8_name">getnames</item>
+		<item type="field9_name">setrole _"CARGO\_ENTRE\_ASPAS"_</item>
 	</command>
 	<command name="setlang">
 		<item type="title">Língua</item>

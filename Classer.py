@@ -224,6 +224,8 @@ async def help(ctx):
                     value=language.find("command[@name='setname']/item[@type='help']").text, inline=False)
     embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field8_name']").text,
                     value=language.find("command[@name='getnames']/item[@type='help']").text, inline=False)
+    embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field9_name']").text,
+                    value=language.find("command[@name='setrole']/item[@type='help']").text, inline=False)
     embed.add_field(name=prefix + language.find("command[@name='help']/item[@type='field4_name']").text,
                     value=language.find("command[@name='help']/item[@type='help']").text, inline=False)
     await ctx.send(embed=embed)
