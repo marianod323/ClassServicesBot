@@ -1,0 +1,5 @@
+class BaseConfig:
+    DISCORD_CLIENT_ID = 00000
+    DISCORD_CLIENT_SECRET = "secret"
+    DISCORD_REDIRECT_URI = "link"
+    DISCORD_BOT_TOKEN = "TOKEN"

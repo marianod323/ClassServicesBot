@@ -45,6 +45,8 @@
 		<item type="howto">Para definir a língua, utilize o comando juntamente com a tag (lang_SIGLA) da língua desejada. As línguas que eu sei falar, por enquanto, são essas aqui:</item>
 		<item type="success">Língua alterada!</item>
 		<item type="success_title">Sucesso!</item>
+		<item type="fail">A língua que você está tentando inserir não está catalogada!</item>
+		<item type="fail_title">Língua não alterada!</item>
 	</command>
 	<command name="settz">
 		<item type="title">Fuso horário</item>

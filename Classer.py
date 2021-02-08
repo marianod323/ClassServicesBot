@@ -2,10 +2,12 @@
 import discord
 import numpy
 import math
+import threading
 from dotenv import load_dotenv
 from discord.ext import commands
 from dateutil import tz
 from PrefHandler import *
+from dashboard.Dashboard import create_app
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -99,12 +101,11 @@ def getusercountstrings(ctx):
             bot_count += 1
         else:
             users_count += 1
-    strings = [language.find("command[@name='usercount']/item[@type='title']").text,
-               language.find("command[@name='usercount']/item[@type='field1_name']").text,
-               str(users_count),
-               language.find("command[@name='usercount']/item[@type='field2_name']").text,
-               str(bot_count)]
-    return strings
+    return [language.find("command[@name='usercount']/item[@type='title']").text,
+            language.find("command[@name='usercount']/item[@type='field1_name']").text,
+            str(users_count),
+            language.find("command[@name='usercount']/item[@type='field2_name']").text,
+            str(bot_count)]
 
 
 @bot.command(name='setlang')
@@ -123,6 +124,9 @@ async def setlang(ctx, language_to_set):
         elif pref_handler.set_lang(language_to_set):
             embed.add_field(name=language.find("command[@name='setlang']/item[@type='success_title']").text,
                             value=language.find("command[@name='setlang']/item[@type='success']").text, inline=False)
+        else:
+            embed.add_field(name=language.find("command[@name='setlang']/item[@type='fail_title']").text,
+                            value=language.find("command[@name='setlang']/item[@type='fail']").text, inline=False)
     else:
         embed.add_field(name=language.find("command[@name='setrole']/item[@type='fail_title']").text,
                         value=language.find("command[@name='setrole']/item[@type='fail']").text, inline=False)
@@ -193,15 +197,25 @@ async def setrole(ctx, role_to_set):
 
 @bot.command(name='getnames')
 async def getnames(ctx):
+    strings = getgetnamesstrings(ctx)
+
+    embed = discord.Embed(title=strings[0], color=0x85fd2c)
+    embed.add_field(name=strings[1], value="---", inline=False)
+    for i in range(2, len(strings), 2):
+        embed.add_field(name=strings[i], value=strings[i+1], inline=False)
+    await ctx.send(embed=embed)
+
+
+def getgetnamesstrings(ctx):
     pref_handler = PrefHandler(ctx.guild.id)
     language = pref_handler.get_lang()
     names = pref_handler.get_names()
-    embed = discord.Embed(title=language.find("command[@name='getnames']/item[@type='title']").text, color=0x85fd2c)
-    embed.add_field(name=language.find("command[@name='getnames']/item[@type='users']").text,
-                    value="---", inline=False)
+    users = []
     for username, real_name in names.items():
-        embed.add_field(name="@"+username, value=real_name, inline=False)
-    await ctx.send(embed=embed)
+        users.append("@" + username)
+        users.append(real_name)
+    return [language.find("command[@name='getnames']/item[@type='title']").text,
+            language.find("command[@name='getnames']/item[@type='users']").text] + users
 
 
 @bot.command(name='help')
@@ -231,4 +245,61 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run(TOKEN)
+@bot.command(name='updatedashboard')
+async def updatedashboard(ctx):
+    pref_handler = PrefHandler(ctx.guild.id)
+
+    # User count
+    usercount_s = getusercountstrings(ctx)
+    usercount_e = pref_handler.root.find('usercount')
+    if usercount_e is None:
+        usercount_e = ET.SubElement(pref_handler.root, 'usercount')
+    usercount_e.set('real_users', usercount_s[2])
+    usercount_e.set('bots', usercount_s[4])
+
+    # User ranking
+    rank = dict()
+
+    for member in ctx.guild.members:
+        rank[member.name] = 0
+
+    for channel in ctx.guild.channels:
+        if channel.type[0] == 'text':
+            async for message in channel.history(limit=50):
+                if not message.author.bot:
+                    rank[message.author.name] = rank.setdefault(message.author.name, 0) + 1
+
+    top10 = sorted(rank.items(), key=lambda item: item[1])
+    top10 = top10[-10:]
+    top10.reverse()
+
+    userrank = pref_handler.root.find('ranking')
+    if userrank is None:
+        userrank = ET.SubElement(pref_handler.root, 'ranking')
+    else:
+        pref_handler.root.remove(userrank)
+        userrank = ET.SubElement(pref_handler.root, 'ranking')
+
+    for member in top10:
+        user_in_top10 = ET.SubElement(userrank, "user")
+        user_in_top10.attrib['username'] = member[0]
+        user_in_top10.text = str(member[1])
+
+    pref_handler.tree.write(pref_handler.file_name, encoding='utf-8')
+
+
+def bot_run():
+    bot.run(TOKEN)
+
+
+def server_run():
+    server = create_app()
+    server.run()
+
+
+if __name__ == '__main__':
+    thread_1 = threading.Thread(target=bot_run)
+    thread_2 = threading.Thread(target=server_run)
+
+    thread_1.start()
+    thread_2.start()

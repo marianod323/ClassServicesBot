@@ -44,6 +44,8 @@
 		<item type="help">Defines bot's language</item>
 		<item type="success">Language modified!</item>
 		<item type="success_title">Success!</item>
+		<item type="fail">The language you are trying to enter is not listed!</item>
+		<item type="fail_title">Language not modified!</item>
 	</command>
 	<command name="settz">
 		<item type="title">Time Zone</item>
